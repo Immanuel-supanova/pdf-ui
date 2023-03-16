@@ -25,7 +25,8 @@ urlpatterns = [
     path('rest/', include('rest_framework.urls')),
     path('api/', include('api.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
-    path('', include('myadmin.urls')),
+    path('myadmin/', include('myadmin.urls')),
+    path('', include('pdf.urls')),
 
 ]
 if settings.DEBUG:

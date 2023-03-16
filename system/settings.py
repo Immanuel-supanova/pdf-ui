@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'api',
     'register',
     'myadmin',
+    'pdf',
 
     'django.contrib.admin',
 

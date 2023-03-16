@@ -1,0 +1,43 @@
+{% extends "myadmin/base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<br>
+<a class="btn btn-outline-secondary" href="{% url 'myadmin-user-create' %}" style="float: right;">
+    Add
+</a>
+<center>
+    <section style="overflow: auto; margin-top:75px">
+        <table class="table table-bordered table-hover">
+            <caption>List of Users</caption>
+            <thead>
+            <tr class="table-primary">
+                {% for fields in field %}
+                <th scope="col">{{fields}}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for users in object_list %}
+            <tr class="table-light">
+
+                <th scope="row">{{forloop.counter}}</th>
+                <td>
+                    <a href="{% url 'myadmin-user-detail' user.id %}" style="text-decoration: none; color: black">
+                        {{users.username}}
+                    </a>
+                </td>
+                <td>{{users.first_name}}</td>
+                <td>{{users.last_name}}</td>
+                <td>{{users.email}}</td>
+                <td>{{users.is_active}}</td>
+                <td>{{users.last_login}}</td>
+
+
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+</center>
+{% endblock %}

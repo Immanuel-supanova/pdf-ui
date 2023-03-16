@@ -1,0 +1,29 @@
+{% extends "myadmin/base.html" %}
+{% block title %}Site|List{% endblock %}
+{% load static %}
+
+{% block content %}
+<div id="groups" style="margin-top:20px;">
+    <a class="btn btn-outline-secondary" href="{% url 'myadmin-site-create' %}" style="float: right;">
+        Add
+    </a><br>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Site</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for site in object_list %}
+        <tr class="table-light">
+            <td>
+                <a href="{% url 'myadmin-site-detail' site.id %}" style="text-decoration: none; color: black">
+                    {{ site.domain }}</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

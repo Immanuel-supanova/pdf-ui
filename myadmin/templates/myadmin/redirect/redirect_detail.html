@@ -1,0 +1,36 @@
+{% extends "myadmin/base.html" %}
+{% block title %}Redirect|Detail{% endblock %}
+{% load static %}
+
+{% block content %}
+<div id="Pages" style="margin-top:20px;">
+    <h6>Redirects</h6>
+    <a class="btn btn-outline-primary" href="{% url 'myadmin-redirect-update' object.id %}" style="float: right;">
+        Edit
+    </a>
+    <a class="btn btn-outline-danger" href="{% url 'myadmin-redirect-delete' object.id %}" style="float: right;">
+        Delete
+    </a><br>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Old Path</th>
+            <th scope="col">New Path</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-light">
+            <td>
+                {{ object.old_path }}
+            </td>
+            <td>
+                {{ object.new_path }}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+
+</div>
+{% endblock %}

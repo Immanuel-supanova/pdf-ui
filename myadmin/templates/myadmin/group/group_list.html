@@ -1,0 +1,30 @@
+{% extends "myadmin/base.html" %}
+{% block title %}Group|List{% endblock %}
+{% load static %}
+
+{% block content %}
+<div id="groups" style="margin-top:20px;">
+    <h6>Groups</h6>
+    <a class="btn btn-outline-secondary" href="{% url 'myadmin-group-create' %}" style="float: right;">
+        Add
+    </a><br>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Group</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for group in object_list %}
+        <tr class="table-light">
+            <td>
+                <a href="{% url 'myadmin-group-detail' group.id %}" style="text-decoration: none; color: black">
+                    {{ group.name }}</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

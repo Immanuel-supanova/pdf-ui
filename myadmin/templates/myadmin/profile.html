@@ -1,0 +1,33 @@
+{% extends "myadmin/base.html" %}
+{% block title %}Profile{% endblock %}
+{% load static %}
+{% block content %}
+{% if user.id != object.user.id %}
+{% include '403.html' %}
+{% else %}
+<style>
+    body{
+        background-color: grey;
+    }
+
+</style>
+<div class="container-fluid" id="profile-card">
+    <div class="card text-center" id="image-card">
+        <div class="card-body">
+            <a href="{% url 'profile_change' object.id %}">
+                <img alt="..." id="profile-image"
+                     src="{% if object.profile_img  is None %}{% static 'images/grey.png' %}{% else %}{{ object.profile_img.url }}{% endif %}">
+            </a>
+            <br><br>
+            <h4 class="card-text">
+                <a href="{% url 'user_change' object.user.id %}" id="full-names">
+                    {{object.user.first_name}} {{object.user.last_name}}</a>
+            </h4>
+            <h6 class="card-text"><i>@{{object.user.username}}</i></h6>
+            {{ object.bio|safe }}<br>
+            <p class="card-text"><small>Joined In: {{ object.user.date_joined }}</small></p>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

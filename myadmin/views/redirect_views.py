@@ -3,10 +3,11 @@ from django.urls import reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
 from ..forms import RedirectForm
-from ..mixins import MyadminMixin, RedirectCreateMixin, RedirectUpdateMixin, RedirectDeleteMixin, RedirectViewMixin
+from ..mixins import MyadminMixin, RedirectCreateMixin, RedirectUpdateMixin, RedirectDeleteMixin, RedirectViewMixin, \
+    SearchMixin
 
 
-class RedirectCreateView(MyadminMixin, RedirectCreateMixin, CreateView):
+class RedirectCreateView(MyadminMixin, SearchMixin, RedirectCreateMixin, CreateView):
     model = Redirect
     form_class = RedirectForm
     template_name = 'myadmin/redirect/redirect_create.html'
@@ -15,7 +16,7 @@ class RedirectCreateView(MyadminMixin, RedirectCreateMixin, CreateView):
         return reverse('myadmin-redirect-list')
 
 
-class RedirectUpdateView(MyadminMixin, RedirectUpdateMixin, UpdateView):
+class RedirectUpdateView(MyadminMixin, SearchMixin, RedirectUpdateMixin, UpdateView):
     model = Redirect
     form_class = RedirectForm
     template_name = 'myadmin/redirect/redirect_update.html'
@@ -24,7 +25,7 @@ class RedirectUpdateView(MyadminMixin, RedirectUpdateMixin, UpdateView):
         return reverse('myadmin-redirect-list')
 
 
-class RedirectDeleteView(MyadminMixin, RedirectDeleteMixin, DeleteView):
+class RedirectDeleteView(MyadminMixin, SearchMixin, RedirectDeleteMixin, DeleteView):
     model = Redirect
     template_name = 'myadmin/redirect/redirect_delete.html'
 
@@ -32,11 +33,11 @@ class RedirectDeleteView(MyadminMixin, RedirectDeleteMixin, DeleteView):
         return reverse('myadmin-redirect-list')
 
 
-class RedirectListView(MyadminMixin, RedirectViewMixin, ListView):
+class RedirectListView(MyadminMixin, SearchMixin, RedirectViewMixin, ListView):
     model = Redirect
     template_name = 'myadmin/redirect/redirect_list.html'
 
 
-class RedirectDetailView(MyadminMixin, RedirectViewMixin, DetailView):
+class RedirectDetailView(MyadminMixin, SearchMixin, RedirectViewMixin, DetailView):
     model = Redirect
     template_name = 'myadmin/redirect/redirect_detail.html'

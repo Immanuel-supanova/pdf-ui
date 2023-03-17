@@ -3,10 +3,11 @@ from django.urls import reverse
 from django.views.generic import CreateView, UpdateView, ListView, DetailView, DeleteView
 
 from myadmin.forms.group_forms import GroupForm
-from myadmin.mixins import MyadminMixin, GroupCreateMixin, GroupUpdateMixin, GroupViewMixin, GroupDeleteMixin
+from myadmin.mixins import MyadminMixin, GroupCreateMixin, GroupUpdateMixin, GroupViewMixin, GroupDeleteMixin, \
+    SearchMixin
 
 
-class GroupCreateView(MyadminMixin, GroupCreateMixin, CreateView):
+class GroupCreateView(MyadminMixin, SearchMixin, GroupCreateMixin, CreateView):
     model = Group
     form_class = GroupForm
     template_name = 'myadmin/group/group_create.html'
@@ -15,7 +16,7 @@ class GroupCreateView(MyadminMixin, GroupCreateMixin, CreateView):
         return reverse('myadmin-group-list')
 
 
-class GroupUpdateView(MyadminMixin, GroupUpdateMixin, UpdateView):
+class GroupUpdateView(MyadminMixin, SearchMixin, GroupUpdateMixin, UpdateView):
     model = Group
     form_class = GroupForm
     template_name = 'myadmin/group/group_update.html'
@@ -24,7 +25,7 @@ class GroupUpdateView(MyadminMixin, GroupUpdateMixin, UpdateView):
         return reverse('myadmin-group-list')
 
 
-class GroupDeleteView(MyadminMixin, GroupDeleteMixin, DeleteView):
+class GroupDeleteView(MyadminMixin, SearchMixin, GroupDeleteMixin, DeleteView):
     model = Group
     template_name = 'myadmin/group/group_delete.html'
 
@@ -32,11 +33,11 @@ class GroupDeleteView(MyadminMixin, GroupDeleteMixin, DeleteView):
         return reverse('myadmin-group-list')
 
 
-class GroupListView(MyadminMixin, GroupViewMixin, ListView):
+class GroupListView(MyadminMixin, SearchMixin, GroupViewMixin, ListView):
     model = Group
     template_name = 'myadmin/group/group_list.html'
 
 
-class GroupDetailView(MyadminMixin, GroupViewMixin, DetailView):
+class GroupDetailView(MyadminMixin, SearchMixin, GroupViewMixin, DetailView):
     model = Group
     template_name = 'myadmin/group/group_detail.html'

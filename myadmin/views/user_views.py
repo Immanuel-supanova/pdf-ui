@@ -6,13 +6,13 @@ from django.urls import reverse
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 
 from ..forms import UserUpdateForm, UserCreateForm
-from ..mixins import MyadminMixin, UserCreateMixin, UserUpdateMixin, UserDeleteMixin, UserViewMixin
+from ..mixins import MyadminMixin, UserCreateMixin, UserUpdateMixin, UserDeleteMixin, UserViewMixin, SearchMixin
 from ..models import Profile
 
 User = get_user_model()
 
 
-class UserListView(MyadminMixin, UserViewMixin, ListView):
+class UserListView(MyadminMixin, SearchMixin, UserViewMixin, ListView):
     model = User
     template_name = 'myadmin/user/user_list.html'
 
@@ -24,7 +24,7 @@ class UserListView(MyadminMixin, UserViewMixin, ListView):
         return context
 
 
-class UserDetailView(MyadminMixin, UserViewMixin, DetailView):
+class UserDetailView(MyadminMixin, SearchMixin, UserViewMixin, DetailView):
     model = User
     template_name = 'myadmin/user/user_detail.html'
 
@@ -47,7 +47,7 @@ class UserDetailView(MyadminMixin, UserViewMixin, DetailView):
         return context
 
 
-class UserCreateView(MyadminMixin, UserCreateMixin, CreateView):
+class UserCreateView(MyadminMixin, SearchMixin, UserCreateMixin, CreateView):
     model = User
     form_class = UserCreateForm
     template_name = 'myadmin/user/user_create.html'
@@ -64,7 +64,7 @@ class UserCreateView(MyadminMixin, UserCreateMixin, CreateView):
         return reverse('myadmin-user-list')
 
 
-class UserUpdateView(MyadminMixin, UserUpdateMixin, UpdateView):
+class UserUpdateView(MyadminMixin, SearchMixin, UserUpdateMixin, UpdateView):
     model = User
     form_class = UserUpdateForm
     template_name = 'myadmin/user/user_change.html'
@@ -81,7 +81,7 @@ class UserUpdateView(MyadminMixin, UserUpdateMixin, UpdateView):
         return reverse('myadmin-user-list')
 
 
-class UserDeleteView(MyadminMixin, UserDeleteMixin, DeleteView):
+class UserDeleteView(MyadminMixin, SearchMixin, UserDeleteMixin, DeleteView):
     model = User
     template_name = 'myadmin/user/user_delete.html'
 

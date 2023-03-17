@@ -12,7 +12,7 @@ from .redirect_views import RedirectCreateView, RedirectUpdateView, RedirectDele
     RedirectDetailView
 from .site_views import SiteCreateView, SiteUpdateView, SiteDeleteView, SiteListView, SiteDetailView
 from .user_views import UserListView, UserUpdateView, UserCreateView, UserDeleteView, UserDetailView
-from ..mixins import MyadminMixin
+from ..mixins import MyadminMixin, SearchMixin
 
 User = get_user_model()
 
@@ -22,12 +22,11 @@ current_year = datetime.datetime.now().year
 
 
 # Create your views here.
-class HomePage(MyadminMixin, TemplateView):
+class HomePage(MyadminMixin, SearchMixin, TemplateView):
     template_name = "myadmin/index.html"
 
     def get_context_data(self, **kwargs):
         # ___________________________________________________________
-
         context = super().get_context_data(**kwargs)
 
         context['current_day'] = current_day

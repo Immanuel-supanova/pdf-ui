@@ -32,7 +32,6 @@
         }
       }
 
-
   </style>
 
 
@@ -50,8 +49,9 @@
   </button>
 
 <form class="w-100" enctype='multipart/form-data' method="post">
-  {% csrf_token %}
-  <input aria-label="Search" class="form-control form-control-dark w-100" placeholder="Search" type="text">
+    {% csrf_token %}
+    <input aria-label="Search" class="form-control form-control-dark w-100" name="searched" placeholder="Search"
+           type="text">
 </form>
 
   <div class="navbar-nav">

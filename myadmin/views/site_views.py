@@ -3,10 +3,10 @@ from django.urls import reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
 from ..forms import SiteForm
-from ..mixins import MyadminMixin, SiteCreateMixin, SiteUpdateMixin, SiteDeleteMixin, SiteViewMixin
+from ..mixins import MyadminMixin, SiteCreateMixin, SiteUpdateMixin, SiteDeleteMixin, SiteViewMixin, SearchMixin
 
 
-class SiteCreateView(MyadminMixin, SiteCreateMixin, CreateView):
+class SiteCreateView(MyadminMixin, SearchMixin, SiteCreateMixin, CreateView):
     model = Site
     form_class = SiteForm
     template_name = 'myadmin/site/site_create.html'
@@ -15,7 +15,7 @@ class SiteCreateView(MyadminMixin, SiteCreateMixin, CreateView):
         return reverse('myadmin-site-list')
 
 
-class SiteUpdateView(MyadminMixin, SiteUpdateMixin, UpdateView):
+class SiteUpdateView(MyadminMixin, SearchMixin, SiteUpdateMixin, UpdateView):
     model = Site
     form_class = SiteForm
     template_name = 'myadmin/site/site_update.html'
@@ -24,7 +24,7 @@ class SiteUpdateView(MyadminMixin, SiteUpdateMixin, UpdateView):
         return reverse('myadmin-site-list')
 
 
-class SiteDeleteView(MyadminMixin, SiteDeleteMixin, DeleteView):
+class SiteDeleteView(MyadminMixin, SearchMixin, SiteDeleteMixin, DeleteView):
     model = Site
     template_name = 'myadmin/site/site_delete.html'
 
@@ -32,11 +32,11 @@ class SiteDeleteView(MyadminMixin, SiteDeleteMixin, DeleteView):
         return reverse('myadmin-site-list')
 
 
-class SiteListView(MyadminMixin, SiteViewMixin, ListView):
+class SiteListView(MyadminMixin, SearchMixin, SiteViewMixin, ListView):
     model = Site
     template_name = 'myadmin/site/site_list.html'
 
 
-class SiteDetailView(MyadminMixin, SiteViewMixin, DetailView):
+class SiteDetailView(MyadminMixin, SearchMixin, SiteViewMixin, DetailView):
     model = Site
     template_name = 'myadmin/site/site_detail.html'

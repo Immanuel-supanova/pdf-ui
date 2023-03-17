@@ -3,6 +3,9 @@
 {% block content %}<br>
 
 <div class="container text-center">
+    {% include "myadmin/include/search.html" %}
+    <br>
+
     <h5>Entries</h5><br>
     <div class="row">
         <div class="col">
@@ -65,6 +68,5 @@
     {% endfor %}
     </tbody>
 </table>
-
 
 {% endblock %}

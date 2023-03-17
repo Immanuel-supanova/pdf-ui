@@ -3,10 +3,11 @@ from django.urls import reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
 from ..forms import FlatPageForm
-from ..mixins import MyadminMixin, FlatPageViewMixin, FlatPageDeleteMixin, FlatPageUpdateMixin, FlatPageCreateMixin
+from ..mixins import MyadminMixin, FlatPageViewMixin, FlatPageDeleteMixin, FlatPageUpdateMixin, FlatPageCreateMixin, \
+    SearchMixin
 
 
-class FlatPageCreateView(MyadminMixin, FlatPageCreateMixin, CreateView):
+class FlatPageCreateView(MyadminMixin, SearchMixin, FlatPageCreateMixin, CreateView):
     model = FlatPage
     form_class = FlatPageForm
     template_name = 'myadmin/flatpage/flatpage_create.html'
@@ -15,7 +16,7 @@ class FlatPageCreateView(MyadminMixin, FlatPageCreateMixin, CreateView):
         return reverse('myadmin-flatpage-list')
 
 
-class FlatPageUpdateView(MyadminMixin, FlatPageUpdateMixin, UpdateView):
+class FlatPageUpdateView(MyadminMixin, SearchMixin, FlatPageUpdateMixin, UpdateView):
     model = FlatPage
     form_class = FlatPageForm
     template_name = 'myadmin/flatpage/flatpage_update.html'
@@ -24,7 +25,7 @@ class FlatPageUpdateView(MyadminMixin, FlatPageUpdateMixin, UpdateView):
         return reverse('myadmin-flatpage-list')
 
 
-class FlatPageDeleteView(MyadminMixin, FlatPageDeleteMixin, DeleteView):
+class FlatPageDeleteView(MyadminMixin, SearchMixin, FlatPageDeleteMixin, DeleteView):
     model = FlatPage
     form_class = FlatPageForm
     template_name = 'myadmin/flatpage/flatpage_delete.html'
@@ -33,11 +34,11 @@ class FlatPageDeleteView(MyadminMixin, FlatPageDeleteMixin, DeleteView):
         return reverse('myadmin-flatpage-list')
 
 
-class FlatPageListView(MyadminMixin, FlatPageViewMixin, ListView):
+class FlatPageListView(MyadminMixin, SearchMixin, FlatPageViewMixin, ListView):
     model = FlatPage
     template_name = 'myadmin/flatpage/flatpage_list.html'
 
 
-class FlatPageDetailView(MyadminMixin, FlatPageViewMixin, DetailView):
+class FlatPageDetailView(MyadminMixin, SearchMixin, FlatPageViewMixin, DetailView):
     model = FlatPage
     template_name = 'myadmin/flatpage/flatpage_detail.html'

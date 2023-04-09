@@ -1,6 +1,4 @@
 import io
-# Create your views here.
-import re
 
 from django.contrib.admin.models import LogEntry, DELETION
 from django.contrib.auth import get_user_model
@@ -11,24 +9,17 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView, DetailView, UpdateView, TemplateView
-from reportlab.lib.pagesizes import letter
-from reportlab.lib.units import inch
-from reportlab.pdfgen import canvas
+from xhtml2pdf import pisa
 
 from .forms import DocumentForm
 from .mixins import PdfCreateMixin, PdfUpdateMixin, PdfViewMixin
 from .models import PdfDocument
 
+# Create your views here.
+
 User = get_user_model()
 
 today = timezone.now()
-# as per recommendation from @freylis, compile once only
-cleanr = re.compile('<.*?>')
-
-
-def cleanhtml(raw_html):
-    cleantext = re.sub(cleanr, '', raw_html)
-    return cleantext
 
 
 # Create your views here.
@@ -36,28 +27,17 @@ def cleanhtml(raw_html):
 def download_pdf(request, pk):
     # Create Bytestream buffer
     buf = io.BytesIO()
-    # Create a canvas
-    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
-    # Create a text object
-    textob = c.beginText()
-    textob.setTextOrigin(inch, inch)
 
     # Designate The Model
     pdf = PdfDocument.objects.get(id=pk)
 
-    # Create blank list
-    lines = []
-
-    lines.append(cleanhtml(pdf.content))
-
-    # Loop
-    for line in lines:
-        textob.textLine(line)
+    # create pdf
+    pisa.CreatePDF(
+        pdf.content,
+        dest=buf,
+    )
 
     # Finish Up
-    c.drawText(textob)
-    c.showPage()
-    c.save()
     buf.seek(0)
 
     # Return something

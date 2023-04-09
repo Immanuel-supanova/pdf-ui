@@ -41,7 +41,6 @@ def download_pdf(request, pk):
     # Create a text object
     textob = c.beginText()
     textob.setTextOrigin(inch, inch)
-    textob.setFont("Helvetica", 14)
 
     # Designate The Model
     pdf = PdfDocument.objects.get(id=pk)

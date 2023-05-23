@@ -1,7 +1,8 @@
-"""system URL Configuration
+"""
+URL configuration for system project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -20,20 +21,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('auth/', include('register.urls')),
-    path('rest/', include('rest_framework.urls')),
-    path('api/', include('api.urls')),
-    path('pages/', include('django.contrib.flatpages.urls')),
-    path('myadmin/', include('myadmin.urls')),
     path('', include('pdf.urls')),
-
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-handler400 = 'register.views.bad_request_view'
-handler403 = 'register.views.access_denied_view'
-handler404 = 'register.views.page_not_found_view'
-handler500 = 'register.views.internal_server_view'

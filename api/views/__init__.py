@@ -1,9 +1,0 @@
-from .contenttype_views import ContentTypeList, ContentTypeRetrieve
-from .flatpage_views import FlatPageList, FlatPageRetrieve
-from .group_views import GroupList, GroupRetrieve
-from .logentry_views import LogEntryList, LogEntryRetrieve
-from .permissions_views import PermissionList, PermissionRetrieve
-from .profile_views import ProfileList, ProfileRetrieve
-from .redirect_views import RedirectList, RedirectRetrieve
-from .session_views import SessionList, SessionRetrieve
-from .user_views import UserList, UserRetrieve

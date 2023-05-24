@@ -3,7 +3,7 @@ from django.urls import path
 from .views import PdfCreateView, PdfDetailView, PdfUpdateView, pdf_delete_view, download_pdf, HomeView
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),
+    path('', HomeView.as_view(), name='pdf'),
     path('new/', PdfCreateView.as_view(), name='pdf-create'),
     path('<int:pk>/', PdfDetailView.as_view(), name='pdf-detail'),
     path('change/<int:pk>', PdfUpdateView.as_view(), name='pdf-update'),
